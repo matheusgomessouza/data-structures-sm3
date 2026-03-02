@@ -21,10 +21,6 @@ src/
     sorting/
     searching/
   data-structures/
-    hash-table/
-    graph/
-    tree/
-    heap/
   utils/
   types/
   tests/
