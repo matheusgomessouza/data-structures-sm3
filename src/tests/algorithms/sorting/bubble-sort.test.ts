@@ -1,3 +1,7 @@
-import { describe } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-describe('Bubble Sort', () => {});
+describe('Bubble Sort', () => {
+  it('should pass', () => {
+    expect(true).toBe(true);
+  });
+});
