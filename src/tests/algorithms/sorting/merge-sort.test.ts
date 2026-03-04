@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mergeSort } from '../../../algorithms/sorting/merge-sort';
+import { mergeSort } from '@/algorithms/sorting/merge-sort';
 
 describe('mergeSort', () => {
   it('should sort an array of numbers in ascending order', () => {
