@@ -37,7 +37,6 @@ export function mergeSort<T extends number | string>(items: T[]): T[] {
 
   const merged = merge(mergeSort(left), mergeSort(right));
 
-  // Copy merged results back into the original array to keep the API in-place.
   for (let i = 0; i < merged.length; i++) {
     items[i] = merged[i]!;
   }
