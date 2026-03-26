@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { Lista, NoLista } from '@/data-structures/single-linked-list-recursive';
+import { Lista, NoLista } from '@/data-structures/singly-linked-list-recursive';
 
 function buildList(values: number[]): Lista {
   const lista = new Lista();

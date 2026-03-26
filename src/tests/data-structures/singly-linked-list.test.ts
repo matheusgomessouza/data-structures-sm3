@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { Lista, NoLista } from '@/data-structures/single-linked-list';
+import { Lista, NoLista } from '@/data-structures/singly-linked-list';
 
 describe('NoLista', () => {
   it('should initialize info/prox and expose accessors', () => {
