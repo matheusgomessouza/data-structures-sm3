@@ -1,4 +1,4 @@
-import { Lista } from './single-linked-list-recursive';
+import { Lista } from './singly-linked-list-recursive';
 
 function printSection(title: string): void {
   console.log(`\n=== ${title} ===`);

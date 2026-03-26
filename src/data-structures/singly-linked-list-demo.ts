@@ -1,4 +1,4 @@
-import { Lista } from './single-linked-list';
+import { Lista } from './singly-linked-list';
 
 function printSection(title: string): void {
   console.log(`\n=== ${title} ===`);
