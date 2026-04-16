@@ -26,34 +26,40 @@ function atenderSenha(fila: FilaVetor): void {
   }
 }
 
-export function runQueueDemo(): void {
-  const capacidadeMaxima = 5;
-  const fila = new FilaVetor(capacidadeMaxima);
+export class FilaMain {
+  public static main(): void {
+    const capacidadeMaxima = 5;
+    const fila = new FilaVetor(capacidadeMaxima);
 
-  printSection('Sistema de atendimento por senhas');
-  console.log(`Capacidade maxima da fila: ${capacidadeMaxima}`);
+    printSection('Sistema de atendimento por senhas');
+    console.log(`Capacidade maxima da fila: ${capacidadeMaxima}`);
 
-  printSection('Chegada inicial de clientes');
-  const senhasIniciais = [101, 102, 103, 104, 105];
+    printSection('Chegada inicial de clientes');
+    const senhasIniciais = [101, 102, 103, 104, 105];
 
-  for (const senha of senhasIniciais) {
-    tryEnqueue(fila, senha);
+    for (const senha of senhasIniciais) {
+      tryEnqueue(fila, senha);
+    }
+
+    printSection('Tentativa de insercao com capacidade esgotada');
+    tryEnqueue(fila, 999);
+
+    printSection('Atendimento e nova chegada');
+    atenderSenha(fila);
+    tryEnqueue(fila, 106);
+
+    printSection('Fila atual na ordem de atendimento');
+    console.log(fila.toString());
+
+    printSection('Reinicio do atendimento');
+    fila.reset();
+    console.log(`Fila vazia? ${fila.isEmpty()}`);
+    console.log(`Representacao textual: "${fila.toString()}"`);
   }
+}
 
-  printSection('Tentativa de insercao com capacidade esgotada');
-  tryEnqueue(fila, 999);
-
-  printSection('Atendimento e nova chegada');
-  atenderSenha(fila);
-  tryEnqueue(fila, 106);
-
-  printSection('Fila atual na ordem de atendimento');
-  console.log(fila.toString());
-
-  printSection('Reinicio do atendimento');
-  fila.reset();
-  console.log(`Fila vazia? ${fila.isEmpty()}`);
-  console.log(`Representacao textual: "${fila.toString()}"`);
+export function runQueueDemo(): void {
+  FilaMain.main();
 }
 
 function isDirectExecution(): boolean {
@@ -67,7 +73,7 @@ function isDirectExecution(): boolean {
 }
 
 if (isDirectExecution()) {
-  runQueueDemo();
+  FilaMain.main();
 }
 
 // npm run build && node dist/data-structures/queue-demo.js
