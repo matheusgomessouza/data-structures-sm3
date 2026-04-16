@@ -9,7 +9,7 @@ export class FilaVetor implements Fila {
   private tam: number;
   private n: number;
   private ini: number;
-  private vet: number[];
+  private vet: Array<number | undefined>;
 
   public constructor(tam: number) {
     if (!Number.isInteger(tam) || tam <= 0) {
@@ -19,7 +19,7 @@ export class FilaVetor implements Fila {
     this.tam = tam;
     this.n = 0;
     this.ini = 0;
-    this.vet = new Array<number>(tam);
+    this.vet = new Array<number | undefined>(tam);
   }
 
   public enqueue(v: number): void {
@@ -38,7 +38,6 @@ export class FilaVetor implements Fila {
     }
 
     const removido = this.vet[this.ini]!;
-    this.vet[this.ini] = 0;
     this.ini = (this.ini + 1) % this.tam;
     this.n--;
 
@@ -52,7 +51,7 @@ export class FilaVetor implements Fila {
   public reset(): void {
     this.n = 0;
     this.ini = 0;
-    this.vet = new Array<number>(this.tam);
+    this.vet = new Array<number | undefined>(this.tam);
   }
 
   public toString(): string {

@@ -26,7 +26,7 @@ function atenderSenha(fila: FilaVetor): void {
   }
 }
 
-export function runFilaMain(): void {
+export function runQueueDemo(): void {
   const capacidadeMaxima = 5;
   const fila = new FilaVetor(capacidadeMaxima);
 
@@ -63,11 +63,11 @@ function isDirectExecution(): boolean {
     return false;
   }
 
-  return currentEntryFile.endsWith('queue-main.ts') || currentEntryFile.endsWith('queue-main.js');
+  return currentEntryFile.endsWith('queue-demo.ts') || currentEntryFile.endsWith('queue-demo.js');
 }
 
 if (isDirectExecution()) {
-  runFilaMain();
+  runQueueDemo();
 }
 
-// npm run build && node dist/data-structures/queue-main.js
+// npm run build && node dist/data-structures/queue-demo.js
