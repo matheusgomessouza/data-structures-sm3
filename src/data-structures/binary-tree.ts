@@ -49,12 +49,16 @@ export class ArvoreBinaria {
     this.raizNo = null;
   }
 
-  public definerRaiz(r: NoArvoreBinaria): void {
+  public definirRaiz(r: NoArvoreBinaria): void {
     this.raizNo = r;
   }
 
-  public raiz(): boolean {
+  public temRaiz(): boolean {
     return this.raizNo !== null;
+  }
+
+  public getRaiz(): NoArvoreBinaria | null {
+    return this.raizNo;
   }
 
   public pertence(v: string): boolean {

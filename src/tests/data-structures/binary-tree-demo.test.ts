@@ -1,138 +1,137 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { ChaveamentoFIFA } from '../../data-structures/binary-tree-demo';
+import { ChaveamentoFIFA } from '@/data-structures/binary-tree-demo';
 
-describe('ChaveamentoFIFA', () => {
+describe('ChaveamentoFIFA - montarChaveamento', () => {
   let chaveamento: ChaveamentoFIFA;
 
   beforeEach(() => {
     chaveamento = new ChaveamentoFIFA();
   });
 
-  describe('montarChaveamento', () => {
-    it('deve montar um chaveamento com árvore válida', () => {
-      chaveamento.montarChaveamento();
-      const arvore = chaveamento.getArvore();
+  it('should build a valid bracket tree', () => {
+    chaveamento.montarChaveamento();
+    const arvore = chaveamento.getArvore();
 
-      expect(arvore.raiz()).toBe(true);
-    });
-
-    it('deve ter estrutura com número correto de nós', () => {
-      chaveamento.montarChaveamento();
-      const arvore = chaveamento.getArvore();
-
-      // 1 final + 2 semifinais + 4 jogos = 7 nós
-      expect(arvore.numeros()).toBe(7);
-    });
-
-    it('deve ter 4 folhas (jogos de grupos)', () => {
-      chaveamento.montarChaveamento();
-      const arvore = chaveamento.getArvore();
-
-      expect(arvore.folhas()).toBe(4);
-    });
-
-    it('deve ter altura correta (3 níveis)', () => {
-      chaveamento.montarChaveamento();
-      const arvore = chaveamento.getArvore();
-
-      expect(arvore.altura()).toBe(2);
-    });
+    expect(arvore.temRaiz()).toBe(true);
   });
 
-  describe('Buscas no chaveamento', () => {
-    beforeEach(() => {
-      chaveamento.montarChaveamento();
-    });
+  it('should have correct number of nodes', () => {
+    chaveamento.montarChaveamento();
+    const arvore = chaveamento.getArvore();
 
-    it('deve encontrar FINAL', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('FINAL')).toBe(true);
-    });
-
-    it('deve encontrar Semifinal 1', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('Semifinal 1')).toBe(true);
-    });
-
-    it('deve encontrar Semifinal 2', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('Semifinal 2')).toBe(true);
-    });
-
-    it('deve encontrar jogo Brasil vs Alemanha', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('Brasil vs Alemanha')).toBe(true);
-    });
-
-    it('deve encontrar jogo França vs Espanha', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('França vs Espanha')).toBe(true);
-    });
-
-    it('deve encontrar jogo Argentina vs Itália', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('Argentina vs Itália')).toBe(true);
-    });
-
-    it('deve encontrar jogo Portugal vs Holanda', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('Portugal vs Holanda')).toBe(true);
-    });
-
-    it('deve retornar false para jogo inexistente', () => {
-      const arvore = chaveamento.getArvore();
-      expect(arvore.pertence('Japão vs Coreia')).toBe(false);
-    });
+    // 1 final + 2 semifinals + 4 matches = 7 nodes
+    expect(arvore.numeros()).toBe(7);
   });
 
-  describe('Traversais do chaveamento', () => {
-    beforeEach(() => {
-      chaveamento.montarChaveamento();
-    });
+  it('should have 4 leaf nodes (quarterfinal matches)', () => {
+    chaveamento.montarChaveamento();
+    const arvore = chaveamento.getArvore();
 
-    it('deve retornar pré-ordem correta', () => {
-      const arvore = chaveamento.getArvore();
-      const resultado = arvore.imprimePre();
-
-      expect(resultado).toContain('FINAL');
-      expect(resultado).toContain('Semifinal 1');
-      expect(resultado).toContain('Semifinal 2');
-      expect(resultado).toContain('Brasil vs Alemanha');
-    });
-
-    it('deve retornar in-ordem correta', () => {
-      const arvore = chaveamento.getArvore();
-      const resultado = arvore.imprimeSim();
-
-      expect(resultado).toContain('Brasil vs Alemanha');
-      expect(resultado).toContain('Semifinal 1');
-    });
-
-    it('deve retornar pós-ordem correta', () => {
-      const arvore = chaveamento.getArvore();
-      const resultado = arvore.imprimePos();
-
-      expect(resultado).toContain('Brasil vs Alemanha');
-      expect(resultado).toContain('FINAL');
-    });
+    expect(arvore.folhas()).toBe(4);
   });
 
-  describe('Igualdade de chaveamentos', () => {
-    it('deve retornar true para chaveamentos idênticos', () => {
-      chaveamento.montarChaveamento();
-      const arvore1 = chaveamento.getArvore();
-      const arvore2 = chaveamento.criarChaveamentoIdentico();
+  it('should have correct height (3 levels)', () => {
+    chaveamento.montarChaveamento();
+    const arvore = chaveamento.getArvore();
 
-      expect(arvore1.igual(arvore2)).toBe(true);
-    });
+    expect(arvore.altura()).toBe(2);
+  });
+});
 
-    it('deve criar chaveamento idêntico com estrutura correta', () => {
-      chaveamento.montarChaveamento();
-      const arvore2 = chaveamento.criarChaveamentoIdentico();
+describe('ChaveamentoFIFA - searches', () => {
+  let chaveamento: ChaveamentoFIFA;
 
-      expect(arvore2.raiz()).toBe(true);
-      expect(arvore2.numeros()).toBe(7);
-      expect(arvore2.folhas()).toBe(4);
-    });
+  beforeEach(() => {
+    chaveamento = new ChaveamentoFIFA();
+    chaveamento.montarChaveamento();
+  });
+
+  it('should find FINAL', () => {
+    expect(chaveamento.getArvore().pertence('FINAL')).toBe(true);
+  });
+
+  it('should find Semifinal 1', () => {
+    expect(chaveamento.getArvore().pertence('Semifinal 1')).toBe(true);
+  });
+
+  it('should find Semifinal 2', () => {
+    expect(chaveamento.getArvore().pertence('Semifinal 2')).toBe(true);
+  });
+
+  it('should find Brasil vs Alemanha match', () => {
+    expect(chaveamento.getArvore().pertence('Brasil vs Alemanha')).toBe(true);
+  });
+
+  it('should find França vs Espanha match', () => {
+    expect(chaveamento.getArvore().pertence('França vs Espanha')).toBe(true);
+  });
+
+  it('should find Argentina vs Itália match', () => {
+    expect(chaveamento.getArvore().pertence('Argentina vs Itália')).toBe(true);
+  });
+
+  it('should find Portugal vs Holanda match', () => {
+    expect(chaveamento.getArvore().pertence('Portugal vs Holanda')).toBe(true);
+  });
+
+  it('should return false for non-existing match', () => {
+    expect(chaveamento.getArvore().pertence('Japão vs Coreia')).toBe(false);
+  });
+});
+
+describe('ChaveamentoFIFA - traversals', () => {
+  let chaveamento: ChaveamentoFIFA;
+
+  beforeEach(() => {
+    chaveamento = new ChaveamentoFIFA();
+    chaveamento.montarChaveamento();
+  });
+
+  it('should return correct pre-order', () => {
+    const resultado = chaveamento.getArvore().imprimePre();
+
+    expect(resultado).toContain('FINAL');
+    expect(resultado).toContain('Semifinal 1');
+    expect(resultado).toContain('Semifinal 2');
+    expect(resultado).toContain('Brasil vs Alemanha');
+  });
+
+  it('should return correct in-order', () => {
+    const resultado = chaveamento.getArvore().imprimeSim();
+
+    expect(resultado).toContain('Brasil vs Alemanha');
+    expect(resultado).toContain('Semifinal 1');
+  });
+
+  it('should return correct post-order', () => {
+    const resultado = chaveamento.getArvore().imprimePos();
+
+    expect(resultado).toContain('Brasil vs Alemanha');
+    expect(resultado).toContain('FINAL');
+  });
+});
+
+describe('ChaveamentoFIFA - equality', () => {
+  let chaveamento: ChaveamentoFIFA;
+
+  beforeEach(() => {
+    chaveamento = new ChaveamentoFIFA();
+  });
+
+  it('should return true for identical brackets', () => {
+    chaveamento.montarChaveamento();
+    const arvore1 = chaveamento.getArvore();
+    const arvore2 = chaveamento.criarChaveamentoIdentico();
+
+    expect(arvore1.igual(arvore2)).toBe(true);
+  });
+
+  it('should create identical bracket with correct structure', () => {
+    chaveamento.montarChaveamento();
+    const arvore2 = chaveamento.criarChaveamentoIdentico();
+
+    expect(arvore2.temRaiz()).toBe(true);
+    expect(arvore2.numeros()).toBe(7);
+    expect(arvore2.folhas()).toBe(4);
   });
 });
